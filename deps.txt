@@ -11,6 +11,8 @@ slurp
 kanata
 kitty
 neovim
+nwg-look
+qt6ct
 zen-browser-bin
 wl-clipboard
 xclip

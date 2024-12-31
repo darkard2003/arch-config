@@ -53,6 +53,9 @@ The script performs the following steps for each application listed in the `CONF
 
 - Ensure you have the necessary permissions to create and modify files in your home directory.
 - Backup any existing configuration files before running the script to avoid accidental data loss.
+- For GTK icons and theme, consider installing:
+  - [Catppuccin Icon Theme](https://github.com/Fausto-Korpsvart/Catppuccin-GTK-Theme.git)
+  - [Catppuccin Cursor Theme](https://github.com/catppuccin/cursors.git)
 
 ### License
 
