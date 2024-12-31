@@ -15,8 +15,8 @@ zen-browser-bin
 wl-clipboard
 xclip
 xdg-user-dirs
-wl-sunset
+wlsunset
 playerctl
 pavucontrol
-power-profiles-daemon
+tlp
 python-gobject
