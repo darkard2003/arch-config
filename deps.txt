@@ -16,6 +16,7 @@ qt6ct
 zen-browser-bin
 wl-clipboard
 xclip
+wl-mirror
 xdg-user-dirs
 xdg-utils
 xdg-desktop-portal-wlr
