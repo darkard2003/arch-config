@@ -1,6 +1,9 @@
+gtk-adwaita=false
+gtk-titlebar=false
 theme=catppuccin-mocha
-window-decoration=false
+window-decoration=true
 window-padding-x=5
 window-padding-y=5
+background=#000000
 background-opacity=0.5
 window-theme=system
