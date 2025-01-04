@@ -4,7 +4,6 @@
 
 (defsrc
   caps  a   s   d   f   j   k   l   ;
-  esc
 )
 
 (defvar
@@ -25,5 +24,4 @@
 
 (deflayer base
   esc @a  @s  @d  @f  @j  @k  @l  @;
-  esc
 )
