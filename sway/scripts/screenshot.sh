@@ -10,7 +10,7 @@ openScreenshot(){
 
 notify_and_open() {
     local filepath="$1"
-    xclip "$filepath"
+    wl-copy < "$filepath"
     action=$(notify-send -A "open=Open" "Screenshot" "Screenshot saved to $filepath")
     if [ "$action" = "open" ]; then
         openScreenshot "$filepath"
