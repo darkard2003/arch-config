@@ -9,6 +9,7 @@ CONFIGS=(
   "swaylock"
   "swaync"
   "waybar"
+  "wofi"
 ) 
 
 safe_clean(){
