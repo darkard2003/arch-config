@@ -1,5 +1,6 @@
 local M = {}
 
+
 M.setup = function()
   vim.keymap.set("n", "gk", vim.diagnostic.open_float)
   vim.keymap.set("n", "[d", vim.diagnostic.goto_prev)
