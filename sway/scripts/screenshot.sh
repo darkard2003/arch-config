@@ -37,9 +37,7 @@ notify_and_open() {
 
     action=$(notify-send -A "open=Open" -A "save=Save" -A "copy=Copy Text" "Screenshot" "Screenshot $filename taken")
 
-    if [ "$action" = "open" ]; then
-        openScreenshot "$filename"
-    elif [ "$action" = "save" ]; then
+    if [ "$action" = "save" ]; then
       saveScreenshot "$filename" "$tmp_path"
     elif [ "$action" = "copy" ]; then
       copyText "$tmp_path"
