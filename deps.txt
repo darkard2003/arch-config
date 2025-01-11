@@ -28,3 +28,5 @@ playerctl
 pavucontrol
 tlp
 python-gobject
+tesseract-data-eng
+tesseract

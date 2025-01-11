@@ -3,9 +3,12 @@
 # Constants
 PICTURES_DIR="$(xdg-user-dir PICTURES)"
 
-# Helper Functions
 openScreenshot(){
     kitty --app-id="user-dialog" --config="/dev/null" -e bash -c "kitten icat '$1'; read -p 'press enter to close...'" 
+}
+
+copyText(){
+  tesseract "$1" - | wl-copy
 }
 
 saveScreenshot(){
@@ -32,12 +35,14 @@ notify_and_open() {
 
     wl-copy < "$tmp_path"
 
-    action=$(notify-send -A "open=Open" -A "save=Save" "Screenshot" "Screenshot $filename taken")
+    action=$(notify-send -A "open=Open" -A "save=Save" -A "copy=Copy Text" "Screenshot" "Screenshot $filename taken")
 
     if [ "$action" = "open" ]; then
         openScreenshot "$filename"
     elif [ "$action" = "save" ]; then
       saveScreenshot "$filename" "$tmp_path"
+    elif [ "$action" = "copy" ]; then
+      copyText "$tmp_path"
     fi
 }
 
