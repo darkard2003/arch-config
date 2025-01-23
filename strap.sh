@@ -10,6 +10,7 @@ CONFIGS=(
   "swaync"
   "waybar"
   "wofi"
+  "code-flags.conf"
 ) 
 
 safe_clean(){

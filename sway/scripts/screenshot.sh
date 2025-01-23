@@ -46,7 +46,7 @@ notify_and_open() {
 
 take_screenshot() {
     local mode="$1"
-    local filename="$(date -Iseconds)_grim.png"
+    local filename=$(date +"%S:%M:%H_%d-%m-%Y_grim.png")
     local tmp_path="/tmp/$filename"
     
     if [ "$mode" = "full" ]; then
@@ -63,7 +63,6 @@ take_screenshot() {
     fi
 }
 
-# Main
 if [ "$1" = "full" ]; then
     take_screenshot "full"
 else
