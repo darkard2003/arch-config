@@ -28,3 +28,13 @@ for i in ${CONFIGS[@]}; do
   safe_clean $config_dir
   ln -s "$PWD/$i" $config_dir
 done
+
+HOME_CONFIGS=(
+  ".tmux.conf"
+  )
+
+for i in ${HOME_CONFIGS[@]}; do
+  echo "Linking $i"
+  safe_clean "$HOME/$i"
+  ln -s "$PWD/$i" "$HOME/$i"
+done

@@ -30,3 +30,4 @@ tlp
 python-gobject
 tesseract-data-eng
 tesseract
+tmux
