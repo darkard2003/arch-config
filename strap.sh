@@ -11,6 +11,7 @@ CONFIGS=(
   "waybar"
   "wofi"
   "code-flags.conf"
+  "tmux"
 ) 
 
 safe_clean(){
@@ -27,14 +28,4 @@ for i in ${CONFIGS[@]}; do
   config_dir="$HOME/.config/$i"
   safe_clean $config_dir
   ln -s "$PWD/$i" $config_dir
-done
-
-HOME_CONFIGS=(
-  ".tmux.conf"
-  )
-
-for i in ${HOME_CONFIGS[@]}; do
-  echo "Linking $i"
-  safe_clean "$HOME/$i"
-  ln -s "$PWD/$i" "$HOME/$i"
 done

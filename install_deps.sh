@@ -27,10 +27,15 @@ done
 
 if [ ${#install_list[@]} -eq 0 ]; then
   echo "All packages are already installed"
-  exit 0
+else
+  echo "Installing packages: ${install_list[@]}"
+  read -p "Do you want to continue? (y/n) " -n 1 -r
+  yay -S ${install_list[@]}
 fi
 
-echo "Installing packages: ${install_list[@]}"
-read -p "Do you want to continue? (y/n) " -n 1 -r
-
-yay -S ${install_list[@]}
+echo "Installing tmux plugin manager"
+if [ -d ~/.tmux/plugins/tpm ]; then
+  echo "tpm is already installed"
+else
+  git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+fi
