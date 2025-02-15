@@ -2,6 +2,8 @@
 
 This repository contains configuration files for various applications and a script to set them up.
 
+## First Install Arch Linux using the [Install Guide](./arch-install-instructions.md)
+
 ## Applications
 
 The following applications are configured by this script:
