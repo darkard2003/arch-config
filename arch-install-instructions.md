@@ -34,8 +34,8 @@ we need four pattion
 Partition	|Type	|Size
 ---------	|----	|----
 Efi			|fat 32	|1G
-Boot		|ext4	|1G
-Swap		|swap	|Double your ram
+Boot			|ext4	|1G
+Swap			|swap	|Double your ram
 LVM			|LUKS	|Rest of the disk space
 
 Use ```fdisk``` or ```cfdisk``` to make the partitons.
@@ -66,37 +66,37 @@ pvcreate /dev/mapper/volume_name
 ```
 
 ### Create a virtual group
-```bash
+```
 vgcreate <your group name> /dev/mapper/volume_name
 ```
 
 ### Create logical volume
-```bash
+```
 lvcreate -l100%FREE -n <logical volume name> <group name>
 ```
 
 This volume will be your root partition
 
 ### Load dm_mod module
-```bash
+```
 modprobe dm_mod
 ```
 
 ### Activate all volume groups
-```bash
+```
 vgscan
 vgchange -ay
 ```
 
 ### Format root partition
-```bash
+```
 mkfs.btrfs /dev/<your volume group>/<root volume>
 ```
 
 ### Mount all the partitions and install linux
 
 Mount all the partitions
-```bash
+```
 mount /dev/<volume group>/<root volume> /mnt
 mkdir /mnt/boot
 mount /dev/<Boot partition> /mnt/boot
@@ -106,17 +106,17 @@ swapon /dev/<swap partition>
 ```
 
 Now install linux with all nessesory packages
-```bash
+```
 pacstrap -K /mnt base linux linux-headers linux-firmware base-devel networkmanager grub efibootmgr lvm2 mtools vim dosfstools
 ```
 
 ## Generate FSTAB and chroot into your system
 
-```bash
+```
 genfstab -U /mnt >> /mnt/etc/fstab
 ```
 
-```bash
+```
 arch-chroot /mnt
 ```
 
@@ -142,17 +142,17 @@ hwclock --systohc
 
 ### Install optional dependencys
 
-```bash
+```
 pacman -S sof-firmware mesa 
 ```
 
 - Intel specific packages
-```bash
+```
 pacman -S intel-media-drivers intel-ucode
 ```
 
 - AMD specific packages
-```bash
+``` 
 pacman -S libva-mesa-driver amd-ucode
 ```
 
