@@ -4,6 +4,7 @@ dex
 sway
 swaync
 swaylock
+swaybg
 waybar
 wofi
 wob
@@ -31,3 +32,4 @@ python-gobject
 tesseract-data-eng
 tesseract
 tmux
+catppuccin-cursors-mocha
