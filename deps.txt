@@ -21,6 +21,7 @@ zen-browser-bin
 wl-clipboard
 xclip
 wl-mirror
+xorg-xwayland
 xdg-user-dirs
 xdg-utils
 xdg-desktop-portal-wlr
@@ -33,3 +34,5 @@ tesseract-data-eng
 tesseract
 tmux
 catppuccin-cursors-mocha
+qt5-quickcontrols2
+qt5-graphicaleffects
