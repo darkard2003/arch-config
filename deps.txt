@@ -4,6 +4,7 @@ dex
 sway
 swaync
 swaylock
+swayidle
 swaybg
 waybar
 wofi
@@ -36,3 +37,5 @@ tmux
 catppuccin-cursors-mocha
 qt5-quickcontrols2
 qt5-graphicaleffects
+acpid
+plymouth
