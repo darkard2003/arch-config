@@ -21,6 +21,7 @@ qt6ct
 zen-browser-bin
 wl-clipboard
 xclip
+cliphist
 wl-mirror
 xorg-xwayland
 xdg-user-dirs
