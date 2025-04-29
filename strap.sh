@@ -8,10 +8,11 @@ CONFIGS=(
   "sway"
   "swaylock"
   "swaync"
+  "tmux"
   "waybar"
+  "wob"
   "wofi"
   "code-flags.conf"
-  "tmux"
 ) 
 
 safe_clean(){

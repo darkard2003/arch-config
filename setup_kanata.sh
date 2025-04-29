@@ -13,7 +13,7 @@ sudo udevadm control --reload-rules && sudo udevadm trigger
 
 sudo modprobe uinput
 
-ln -sf "./services/kanata.service" "$HOME/.config/systemd/user/kanata.service"
+cp -sf "./services/kanata.service" "$HOME/.config/systemd/user/kanata.service"
 sudo systemctl --user enable kanata.service
 
 echo "Reboot your system to take effect"
