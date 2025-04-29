@@ -6,3 +6,4 @@ background-opacity=0.5
 window-theme=system
 confirm-close-surface=false
 keybind = global:ctrl+shift+t=toggle_quick_terminal
+font-size=16
