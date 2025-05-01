@@ -40,3 +40,5 @@ qt5-quickcontrols2
 qt5-graphicaleffects
 acpid
 plymouth
+gvfs
+gvfs-smb
