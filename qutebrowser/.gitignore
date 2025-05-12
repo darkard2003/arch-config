@@ -1,0 +1,31 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+pip-wheel-metadata/
+.installed.cfg
+*.egg-info/
+*.egg
+
+# Editor-specific
+.vscode/
+.idea/
+*.swp
+*~
+
+# Qutebrowser specific
+autoconfig.yml
+bookmarks/
+quickmarks
+history
+cookies
+sessions/
+favicons/
+state
+webengine/
+webkit/
+greasemonkey

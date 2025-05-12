@@ -13,6 +13,7 @@ CONFIGS=(
   "wob"
   "wofi"
   "code-flags.conf"
+  "qutebrowser"
 ) 
 
 safe_clean(){
