@@ -32,5 +32,3 @@ for i in ${CONFIGS[@]}; do
   ln -s "$PWD/$i" $config_dir
 done
 
-echo "Setting up kanata"
-sh ./setup_kanata.sh
