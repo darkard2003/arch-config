@@ -2,9 +2,10 @@ import os
 from urllib.request import urlopen
 
 config.load_autoconfig()
+
 c.completion.shrink = True
-
-
+c.colors.webpage.preferred_color_scheme = "dark"
+c.colors.webpage.darkmode.enabled = True
 
 
 # Catppuccin Theme
