@@ -1,3 +1,6 @@
+pipewire
+wireplumber
+pipewire-pulse
 polkit
 polkit-gnome
 dex
@@ -43,3 +46,4 @@ plymouth
 thunar
 gvfs
 gvfs-smb
+ttf-noto-nerd
