@@ -24,7 +24,7 @@ window#waybar {
     transition-property: background-color;
     transition-duration: .5s;
     transition-timing-function: ease;
-    border: 2px solid alpha(@crust, 0.3);
+    /* border: 2px solid alpha(@crust, 0.3); */
 }
 
 
