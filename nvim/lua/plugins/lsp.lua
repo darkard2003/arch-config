@@ -36,7 +36,13 @@ return {
     local mason_lsp = require 'mason-lspconfig'
     mason_lsp.setup({
       ensure_installed = { "lua_ls" },
-      handlers = lsp.handlers,
+      automatic_enable = false,
     })
+    local handler = lsp.handler
+    local servers = mason_lsp.get_installed_servers()
+    for _, server in ipairs(servers) do
+      handler(server)
+    end
+
   end
 }

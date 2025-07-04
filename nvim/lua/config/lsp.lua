@@ -18,10 +18,30 @@ M.setup = function()
   vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist)
 
   local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
-  for type, icon in pairs(signs) do
-    local hl = "DiagnosticSign" .. type
-    vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
-  end
+  vim.diagnostic.config({
+    virtual_text = {
+      prefix = '',
+      spacing = 4,
+    },
+    signs = {
+      text = {
+        [vim.diagnostic.severity.ERROR] = signs.Error,
+        [vim.diagnostic.severity.WARN] = signs.Warn,
+        [vim.diagnostic.severity.HINT] = signs.Hint,
+        [vim.diagnostic.severity.INFO] = signs.Info,
+      },
+    },
+    underline = true,
+    update_in_insert = false,
+    severity_sort = true,
+    float = {
+      border = 'rounded',
+      focusable = false,
+      style = 'minimal',
+      header = '',
+      prefix = '',
+    },
+  })
 end
 
 
@@ -56,7 +76,6 @@ M.on_attach = function(client, buffer)
   }
 
   for _, v in ipairs(lsp_method_map) do
-    -- if client.supports_method(v.name) then
     vim.keymap.set('n', v.keymap, v.action, { buffer = buffer })
     if v.name == 'textDocument/formatting' then
       vim.api.nvim_create_autocmd('BufWritePre', {
@@ -66,39 +85,42 @@ M.on_attach = function(client, buffer)
         end
       })
     end
-    -- end
   end
 end
 
 
 M.capabilites = require('cmp_nvim_lsp').capabilites
 
-M.handlers = {
-  function(server_name)
-    local opts = {
-      capabilites = M.capabilites,
-      on_attach = M.on_attach,
-    }
-    if server_name == "lua_ls" then
-      local lua_opts = {
-        settings = {
-          Lua = {
-            diagnostics = {
-              globals = { "vim" },
-            },
-            workspace = {
-              library = {
-                [vim.fn.expand("$VIMRUNTIME/lua")] = true,
-                [vim.fn.stdpath("config") .. "/lua"] = true,
-              },
+M.handler = function(server_name)
+  local opts = {
+    capabilites = M.capabilites,
+    on_attach = M.on_attach,
+  }
+  if server_name == "lua_ls" then
+    local lua_opts = {
+      settings = {
+        Lua = {
+          runtime = {
+            version = 'LuaJIT',
+            path = {
+              'lua/?.lua',
+              'lua/?/init.lua',
             },
           },
+          workspace = {
+            checkThirdParty = false,
+            library = {
+              vim.env.VIMRUNTIME
+            }
+          },
         },
-      }
-      opts = vim.tbl_deep_extend("force", lua_opts, opts)
-    end
-    require('lspconfig')[server_name].setup(opts)
+      },
+    }
+    opts = vim.tbl_deep_extend("force", opts, lua_opts)
   end
-}
+  require('lspconfig')[server_name].setup(opts)
+end
+
+
 
 return M
