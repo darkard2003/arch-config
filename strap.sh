@@ -14,6 +14,7 @@ CONFIGS=(
   "wofi"
   "code-flags.conf"
   "qutebrowser"
+  "niri"
 ) 
 
 safe_clean(){

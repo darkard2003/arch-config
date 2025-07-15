@@ -4,12 +4,15 @@ local luasnip = require 'luasnip'
 
 require("luasnip.loaders.from_vscode").lazy_load()
 
+vim.api.nvim_set_hl(0, "CmpItemKindSupermaven", { fg = "#6CC644" })
+
 cmp.setup({
   formatting = {
     format = lspkind.cmp_format({
       mode = 'symbol',
       symbol_map = {
-        Copilot = ""
+        Copilot = "",
+        Supermaven = "",
       },
       maxwidth = {
         menu = 50,
@@ -48,9 +51,10 @@ cmp.setup({
     }),
   }),
   sources = cmp.config.sources({
-    { name = "copilot",  group_index = 2 },
-    { name = 'nvim_lsp', group_index = 2 },
-    { name = 'luasnip',  group_index = 2 }, -- For luasnip users.
+    { name = "supermaven", group_index = 1 },
+    { name = "copilot",    group_index = 2 },
+    { name = 'nvim_lsp',   group_index = 2 },
+    { name = 'luasnip',    group_index = 2 }, -- For luasnip users.
   }, {
     { name = 'buffer' },
   })
