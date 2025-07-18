@@ -1,0 +1,17 @@
+include display.conf
+include sysvar.conf
+include vars.conf
+include custom.d/vars.conf
+include desktoprules.conf
+include idle.conf
+include touchpad.conf
+include keybinds.conf
+include exec.conf
+include decoraion.conf
+include windowrules.conf
+include colors.conf
+include custom.d/*.conf
+
+bar swaybar_command waybar
+
+xwayland enable
