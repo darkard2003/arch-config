@@ -7,7 +7,7 @@
   --noti-bg-alpha: 1.0;
   --noti-bg-darker: var(--color0);
   --noti-bg-hover: var(--color8);
-  --noti-bg-focus: var(--color8);
+  --noti-bg-focus: var(--color0);
   --noti-close-bg: var(--color8);
   --noti-close-bg-hover: var(--color6);
   --text-color: var(--foreground);
@@ -46,7 +46,8 @@
 }
 
 .notification-row:focus {
-  background: var(--noti-bg-focus);
+  /* background: var(--noti-bg-focus); */
+  background-color: transparent;
 }
 
 .notification-row .notification-background {
@@ -54,7 +55,6 @@
 }
 
 .notification-row .notification-background .notification {
-  /* The actual notification */
   border-radius: 12px;
   border: 1px solid var(--noti-border-color);
   padding: 0;
@@ -62,16 +62,9 @@
   background: var(--noti-bg);
 }
 
-.notification-row .notification-background .notification.low {
-  /* Low Priority Notification */
-}
-
-.notification-row .notification-background .notification.normal {
-  /* Normal Priority Notification */
-}
-
 .notification-row .notification-background .notification.critical {
   /* Critical Priority Notification */
+  border-color: var(--color1);
 }
 
 .notification-row .notification-background .notification .notification-default-action {
@@ -161,41 +154,11 @@
 .notification-row .notification-background .notification .notification-default-action .notification-content .body-image {
   /* The "extra" optional bottom notification image */
   margin-top: 4px;
-  background-color: white;
+  background-color: transparent;
   -gtk-icon-filter: none;
 }
 
-.notification-row .notification-background .notification .notification-default-action .notification-content .inline-reply {
-  /* The inline reply section */
-  margin-top: 4px;
-}
 
-.notification-row .notification-background .notification .notification-default-action .notification-content .inline-reply .inline-reply-entry {
-  background: var(--noti-bg-darker);
-  color: var(--text-color);
-  caret-color: var(--text-color);
-  border: 1px solid var(--noti-border-color);
-  border-radius: 12px;
-}
-
-.notification-row .notification-background .notification .notification-default-action .notification-content .inline-reply .inline-reply-button {
-  margin-left: 4px;
-  background: var(--noti-bg);
-  border: 1px solid var(--noti-border-color);
-  border-radius: 12px;
-  color: var(--text-color);
-}
-
-.notification-row .notification-background .notification .notification-default-action .notification-content .inline-reply .inline-reply-button:disabled {
-  background: initial;
-  color: var(--text-color-disabled);
-  border: 1px solid var(--noti-border-color);
-  border-color: transparent;
-}
-
-.notification-row .notification-background .notification .notification-default-action .notification-content .inline-reply .inline-reply-button:hover {
-  background: var(--noti-bg-hover);
-}
 
 .notification-row .notification-background .notification .notification-alt-actions {
   background: none;
@@ -217,23 +180,10 @@
 .notification-group {
   /* Styling only for Grouped Notifications */
   transition: opacity 200ms ease-in-out;
-  /* The groups close button */
 }
 
 .notification-group:focus {
   background: var(--noti-bg-focus);
-}
-
-.notification-group.low {
-  /* Low Priority Group */
-}
-
-.notification-group.normal {
-  /* Low Priority Group */
-}
-
-.notification-group.critical {
-  /* Low Priority Group */
 }
 
 .notification-group .notification-group-close-button .close-button {
@@ -245,10 +195,6 @@
   color: var(--text-color);
 }
 
-.notification-group .notification-group-headers {
-  /* Notification Group Headers */
-}
-
 .notification-group .notification-group-headers .notification-group-icon {
   color: var(--text-color);
   -gtk-icon-size: var(--notification-group-icon-size);
@@ -258,25 +204,12 @@
   color: var(--text-color);
 }
 
-.notification-group .notification-group-buttons {
-  /* Notification Group Buttons */
-}
-
-.notification-group.collapsed {
-  /* When another group is expanded, lower the opacity of the collapsed ones */
-}
-
 .notification-group.collapsed.not-expanded {
   opacity: 0.4;
 }
 
 .notification-group.collapsed .notification-row .notification {
   background-color: var(--noti-bg);
-}
-
-.notification-group.collapsed .notification-row:not(:last-child) {
-  /* Top notification in stack */
-  /* Set lower stacked notifications opacity to 0 */
 }
 
 .notification-group.collapsed .notification-row:not(:last-child) .notification-action,
@@ -432,20 +365,8 @@
   font-size: 1.1rem;
 }
 
-.widget-mpris .widget-mpris-player .mpris-overlay > box > button {
-  /* Change player control buttons */
-}
-
 .widget-mpris .widget-mpris-player .mpris-overlay > box > button:hover {
   background-color: var(--mpris-button-hover);
-}
-
-.widget-mpris > box > button {
-  /* Change player side buttons */
-}
-
-.widget-mpris > box > button:disabled {
-  /* Change player side buttons insensitive */
 }
 
 /* Buttons widget */
@@ -459,36 +380,7 @@
   border-radius: 12px;
 }
 
-.widget-buttons-grid flowboxchild > button.toggle:checked {
-  /* style given to the active toggle button */
-}
-
 /* Menubar widget */
-.widget-menubar {
-  /* The revealer buttons */
-  /* .AnyName { Name defined in config after #
-    background-color: rgba(var(--noti-bg), 1.0);
-    padding: 8px;
-    margin: 8px;
-    border-radius: 12px;
-  }
-
-  .AnyName>button {
-    background: transparent;
-    border: none;
-  }
-
-  .AnyName>button:hover {
-    background-color: var(--noti-bg-hover);
-  } */
-}
-
-.widget-menubar > .menu-button-bar {
-  /* The left button container */
-  /* The right button container */
-  /* The left and right button container */
-}
-
 .widget-menubar > .menu-button-bar > .start {
   margin-left: 8px;
 }

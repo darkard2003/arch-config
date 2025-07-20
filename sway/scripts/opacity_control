@@ -1,0 +1,56 @@
+#!/bin/bash
+
+if [ -z "$KITTY_WINDOW_ID" ]; then
+  echo "Error: KITTY_WINDOW_ID is not set."
+  exit 1
+fi
+
+if [ $# -eq 1 ]; then
+  opacity=$1
+  if (( $(echo "$opacity < 0.0 || $opacity > 1.0" | bc -l) )); then
+    echo "Error: Opacity must be between 0 and 1."
+    exit 1
+  fi
+
+  kitty @ set-background-opacity --match id:"$KITTY_WINDOW_ID" "$opacity"
+  echo "Set opacity to $opacity"
+  exit 0
+fi
+    
+
+# Requires `jq` to parse JSON output from kitty @ ls
+if ! command -v jq &> /dev/null; then
+    echo "Error: jq is not installed. Please install it to use this script."
+    exit 1
+fi
+
+# Get the ID of the current Kitty OS window
+# This assumes you want to change opacity for the window where the script is run
+kitty_window_id=$KITTY_WINDOW_ID
+
+if [ -z "$kitty_window_id" ]; then
+    echo "Error: Not running inside a Kitty terminal or KITTY_WINDOW_ID is not set."
+    exit 1
+fi
+
+# Get the current opacity of the focused window
+# kitty @ ls provides information about windows, you need to find the one matching kitty_window_id
+current_opacity=$(kitty @ ls | jq -r --arg id "$kitty_window_id" '.[] | select(.id == ($id | tonumber)) | .background_opacity')
+
+if [ -z "$current_opacity" ]; then
+    echo "Error: Could not retrieve current opacity for window ID $kitty_window_id."
+    exit 1
+fi
+
+# Define your toggle values
+OPAQUE_VALUE=0.75
+TRANSPARENT_VALUE=0.5
+
+# Use bc for floating-point comparison
+if (( $(echo "$current_opacity == $OPAQUE_VALUE" | bc -l) )); then
+    kitty @ set-background-opacity --match id:"$kitty_window_id"  "$TRANSPARENT_VALUE" 
+    echo "Set opacity to $TRANSPARENT_VALUE"
+else
+    kitty @ set-background-opacity  --match id:"$kitty_window_id" "$OPAQUE_VALUE"
+    echo "Set opacity to $OPAQUE_VALUE"
+fi
