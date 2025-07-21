@@ -47,4 +47,5 @@ thunar
 gvfs
 gvfs-smb
 ttf-noto-nerd
+python-pywal16
 themix-full-git

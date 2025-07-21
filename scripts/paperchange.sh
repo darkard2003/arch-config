@@ -26,6 +26,10 @@ echo "Copying theme"
 cp $THEME_DIR/colors-sway $CONFIG_DIR/sway
 cp $THEME_DIR/colors-waybar.css $CONFIG_DIR/waybar
 cp $THEME_DIR/colors.css $CONFIG_DIR/swaync
+cp $THEME_DIR/colors.sh $CONFIG_DIR/swaylock
+
+echo "Generating SwayLock config"
+sh $CONFIG_DIR/swaylock/generate.sh $WALLPAPER_DIR/$image.jpg
 
 echo "Reloading swaync"
 swaync-client -R && swaync-client -rs
