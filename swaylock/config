@@ -17,42 +17,42 @@ font-size=24
 # Alpha values: FF = fully opaque, BB = ~75% opaque, 00 = fully transparent
 
 # Inside color of the indicator
-inside-color=1B1E2FBB
-inside-clear-color=1E8FB9BB  # Example: a lighter accent color when cleared
-inside-caps-lock-color=5BA0BCBB # Example: another accent color for caps lock
-inside-ver-color=2590B8BB    # Example: a success color
-inside-wrong-color=837DB4BB   # Example: an error color
+inside-color=1A1B1EBB
+inside-clear-color=77BED8BB  # Example: a lighter accent color when cleared
+inside-caps-lock-color=76C1DDBB # Example: another accent color for caps lock
+inside-ver-color=74BEDEBB    # Example: a success color
+inside-wrong-color=5691A5BB   # Example: an error color
 
 # Ring color of the indicator
-ring-color=1B1E2FFF
-ring-clear-color=1E8FB9FF
-ring-caps-lock-color=5BA0BCFF
-ring-ver-color=2590B8FF
-ring-wrong-color=837DB4FF
+ring-color=1A1B1EFF
+ring-clear-color=77BED8FF
+ring-caps-lock-color=76C1DDFF
+ring-ver-color=74BEDEFF
+ring-wrong-color=5691A5FF
 
 # Line color (between inside and ring)
-line-color=1B1E2FFF
-line-clear-color=1E8FB9FF
-line-caps-lock-color=5BA0BCFF
-line-ver-color=2590B8FF
-line-wrong-color=837DB4FF
+line-color=1A1B1EFF
+line-clear-color=77BED8FF
+line-caps-lock-color=76C1DDFF
+line-ver-color=74BEDEFF
+line-wrong-color=5691A5FF
 
 # Text color (for password input, layout, etc.)
-text-color=C6C6CBFF
-text-clear-color=C6C6CBFF
-text-caps-lock-color=C6C6CBFF
-text-ver-color=C6C6CBFF
-text-wrong-color=C6C6CBFF
+text-color=C5C6C6FF
+text-clear-color=C5C6C6FF
+text-caps-lock-color=C5C6C6FF
+text-ver-color=C5C6C6FF
+text-wrong-color=C5C6C6FF
 
 # Highlight colors for key presses
-key-hl-color=9EAFBDFF
-bs-hl-color=837DB4FF
+key-hl-color=75C2E0FF
+bs-hl-color=5691A5FF
 separator-color=00000000 # Transparent separator
 
 # Layout text (e.g., keyboard layout indicator)
-layout-text-color=C6C6CBFF
-layout-bg-color=1B1E2FBB
-layout-border-color=1B1E2FFF
+layout-text-color=C5C6C6FF
+layout-bg-color=1A1B1EBB
+layout-border-color=1A1B1EFF
 
 # Other options you might want:
 # show-failed-attempts
