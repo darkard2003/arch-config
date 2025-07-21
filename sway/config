@@ -1,3 +1,4 @@
+include sysvar.conf
 include display.conf
 include vars.conf
 include custom.d/vars.conf
