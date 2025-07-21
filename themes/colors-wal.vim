@@ -1,0 +1,23 @@
+" Special
+let wallpaper  = "/home/dark/arch-config/wallpapers/inouske.jpg"
+let background = "#1a1b1e"
+let foreground = "#c5c6c6"
+let cursor     = "#c5c6c6"
+
+" Colors
+let color0  = "#1a1b1e"
+let color1  = "#5691A5"
+let color2  = "#77BED8"
+let color3  = "#74BEDE"
+let color4  = "#76C1DD"
+let color5  = "#75C2E0"
+let color6  = "#BDC1B0"
+let color7  = "#c5c6c6"
+let color8  = "#606075"
+let color9  = "#5691A5"
+let color10 = "#77BED8"
+let color11 = "#74BEDE"
+let color12 = "#76C1DD"
+let color13 = "#75C2E0"
+let color14 = "#BDC1B0"
+let color15 = "#c5c6c6"

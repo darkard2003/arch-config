@@ -2,6 +2,9 @@
 {
     "position": "top", // Waybar position (top|bottom|left|right)
     "spacing": 4, // Gaps between modules (4px)
+    "margin-left": 10, // Margin around left side (10px)
+    "margin-right": 10, // Margin around right side (10px)
+    "margin-top": 5,
     "modules-left": [
         "custom/arch",
         "clock",
@@ -42,7 +45,7 @@
         "format-icons": {
             "1": " ",
             "2": " ",
-            "3": " ",
+            "3": " ",
             "4": " ",
             "5": "󰎱 ",
             "6": "󰎳 ",

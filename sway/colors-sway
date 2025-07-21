@@ -1,0 +1,21 @@
+set $wallpaper /home/dark/arch-config/wallpapers/inouske.jpg
+
+set $background #1a1b1e
+set $foreground #c5c6c6
+
+set $color0 #1a1b1e
+set $color1 #5691A5
+set $color2 #77BED8
+set $color3 #74BEDE
+set $color4 #76C1DD
+set $color5 #75C2E0
+set $color6 #BDC1B0
+set $color7 #c5c6c6
+set $color8 #606075
+set $color9 #5691A5
+set $color10 #77BED8
+set $color11 #74BEDE
+set $color12 #76C1DD
+set $color13 #75C2E0
+set $color14 #BDC1B0
+set $color15 #c5c6c6
