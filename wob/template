@@ -1,0 +1,14 @@
+anchor = bottom
+margin = 30
+border_size = 2
+bar_padding = 4
+border_offset = 0
+height = 32
+width = 400
+
+border_color = {{BORDER_COLOR}}
+background_color = {{BACKGROUND_COLOR}}
+bar_color = {{BAR_COLOR}}
+overflow_bar_color = {{OVERFLOW_BAR_COLOR}}
+overflow_background_color = {{OVERFLOW_BACKGROUND_COLOR}}
+overflow_border_color = {{OVERFLOW_BORDER_COLOR}}

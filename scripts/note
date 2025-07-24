@@ -1,0 +1,74 @@
+#!/bin/bash
+
+NOTES_DIR="$HOME/notes"
+TERMINAL="kitty"
+NEW_NOTE_OPTION="new"
+
+if [[ ! -d "$NOTES_DIR" ]]; then
+    mkdir -p "$NOTES_DIR"
+fi
+
+
+open_note() {
+    local note_name="$1"
+    if [[ -z "$note_name" ]]; then
+        notify-send "Error" "No note selected."
+        return 1
+    fi
+    exec "$TERMINAL" -e nvim "$NOTES_DIR/$note_name.md"
+}
+
+new_note() {
+    local new_note_name
+    new_note_name=$(wofi --dmenu --prompt="Enter new note name")
+
+    if [[ -z "$new_note_name" ]]; then
+        notify-send "Cancelled" "No note name entered."
+        return 0
+    fi
+
+    local note_path="$NOTES_DIR/$new_note_name.md"
+    local note_dir
+    note_dir=$(dirname "$note_path")
+
+    if [[ ! -d "$note_dir" ]]; then
+        mkdir -p "$note_dir"
+    fi
+
+    if [[ ! -f "$note_path" ]]; then
+        touch "$note_path"
+    fi
+    
+    open_note "$new_note_name"
+}
+
+
+other_options=(
+  $NEW_NOTE_OPTION
+)
+
+existing_notes=$(find "$NOTES_DIR" -type f -name "*.md" -printf "%P\n" | sed 's/\.md$//')
+
+all_options=$( { printf '%s\n' "${other_options[@]}"; printf '%s\n' "$existing_notes"; } | sed '/^$/d' )
+
+selected_option=$(echo -e "$all_options" | wofi --dmenu --allow-markup --sort-order=default --prompt="Take Note 📝")
+
+if [[ -z "$selected_option" ]]; then
+    exit 0
+fi
+
+is_other_option=false
+for option in "${other_options[@]}"; do
+    if [[ "$selected_option" == "$option" ]]; then
+        is_other_option=true
+        break
+    fi
+done
+
+if $is_other_option; then
+    if [[ "$selected_option" == $NEW_NOTE_OPTION ]]; then
+        new_note
+    fi
+else
+    open_note "$selected_option"
+fi
