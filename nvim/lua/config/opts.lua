@@ -10,6 +10,7 @@ local opts = {
   splitbelow = true,
   foldlevel = 99,
   list = true,
+  wrap = false,
   listchars = { tab = '▸ ', trail = '·', extends = '>', precedes = '<', space = '·' },
 }
 
