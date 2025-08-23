@@ -1,5 +1,22 @@
 #!/bin/bash
 
+if ! grep -q "Arch Linux" /etc/os-release; then
+  echo "This script is only for Arch Linux"
+  exit 1
+fi
+
+INTEL_EXTRA_DEPS=(
+  "intel-ucode"
+  "vulkan-intel"
+  "libva-intel-driver"
+  "libva-utils"
+)
+
+AMD_EXTRA_DEPS=(
+  "amd-ucode"
+  "vulkan-radeon"
+)
+
 # Check if yay is installed and install it if not
 if ! command -v yay &> /dev/null
 then
@@ -13,10 +30,28 @@ then
 else
     echo "yay is already installed"
 fi
-
 install_list=()
 
-for package in $(cat deps.txt); do
+package_list=$(cat deps.txt)
+
+if [ $(uname -m) == "x86_64" ]; then
+  if grep -q "amd" /proc/cpuinfo; then
+      echo "AMD CPU detected"
+      package_list+=(${AMD_EXTRA_DEPS[@]})
+    elif grep -q "intel" /proc/cpuinfo; then
+      echo "Intel CPU detected"
+      package_list+=(${INTEL_EXTRA_DEPS[@]})
+    else 
+      echo "Unknown CPU detected"
+      echo "Please microcode and vulkan drivers if needed"
+  fi
+else 
+  echo "Unknown architecture detected"
+  echo "Some packages may not be installable"
+fi
+
+
+for package in ${package_list[@]}; do
   if ! yay -Q $package &> /dev/null; then
     echo "$package is not installed"
     install_list+=($package)

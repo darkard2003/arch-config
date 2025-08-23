@@ -1,3 +1,4 @@
+mesa
 pipewire
 wireplumber
 pipewire-pulse
@@ -38,7 +39,6 @@ python-gobject
 tesseract-data-eng
 tesseract
 tmux
-catppuccin-cursors-mocha
 qt5-quickcontrols2
 qt5-graphicaleffects
 acpid
@@ -49,3 +49,4 @@ gvfs-smb
 ttf-noto-nerd
 python-pywal16
 themix-full-git
+alsa-utils
