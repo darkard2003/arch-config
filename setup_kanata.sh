@@ -3,11 +3,9 @@ sudo -v
 
 TEMP_DIR="./temp"
 
-if [ ! -d $TEMP_DIR ]; then
-  mkdir $TEMP_DIR
-fi
+mkdir -p $TEMP_DIR
 
-sudo groupadd uinput
+getent group uinput >/dev/null || sudo groupadd uinput
 
 sudo usermod -aG uinput $USER
 sudo usermod -aG input $USER
@@ -23,7 +21,7 @@ sudo modprobe uinput
 
 CONFIG_DIR="$HOME/.config/systemd/user"
 
-[ ! -d $CONFIG_DIR ] || mkdir -p $CONFIG_DIR
+mkdir -p "$CONFIG_DIR"
 
 cp "./services/kanata.service" "$HOME/.config/systemd/user/kanata.service"
 systemctl --user enable kanata.service
