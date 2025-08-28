@@ -28,6 +28,8 @@ xclip
 cliphist
 wl-mirror
 xorg-xwayland
+xorg-xrandr
+xorg-xrdb
 xdg-user-dirs
 xdg-utils
 xdg-desktop-portal-wlr
