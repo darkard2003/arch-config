@@ -1,5 +1,6 @@
 #!/bin/bash
 
+
 CONFIGS=( 
   "ghostty" 
   "kanata"
@@ -25,6 +26,22 @@ safe_clean(){
     rm "$1"
   fi
 }
+
+if [ "$1" == "-only" ]; then
+  only_configs=( "$@" )
+  # remove the -only argument
+  only_configs=( "${only_configs[@]:1}" )
+  for i in ${only_configs[@]}; do
+    if [ -e "$PWD/$i" ]; then
+      echo "Linking $i"
+      safe_clean "$HOME/.config/$i"
+      ln -s "$PWD/$i" "$HOME/.config/$i"
+    else
+      echo "Config $i does not exist in arch-config"
+    fi
+    exit 0
+  done
+fi
 
 for i in ${CONFIGS[@]}; do
   echo "Linking $i"
