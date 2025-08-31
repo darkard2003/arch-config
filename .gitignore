@@ -1,1 +1,10 @@
 temp/**
+
+kitty/current-theme.conf
+sway/colors-sway
+sway/wallpaper.jpg
+swaylock/lockscreen_blur.png
+swaylock/config
+swaync/colors.css
+waybar/colors-waybar.css
+wob/wob.ini

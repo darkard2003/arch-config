@@ -17,3 +17,5 @@ local opts = {
 for k, v in pairs(opts) do
   vim.opt[k] = v
 end
+
+vim.opt.clipboard:append('unnamedplus')
