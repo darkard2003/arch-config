@@ -16,6 +16,7 @@ CONFIGS=(
   "code-flags.conf"
   "qutebrowser"
   "niri"
+  "kanshi"
 ) 
 
 safe_clean(){

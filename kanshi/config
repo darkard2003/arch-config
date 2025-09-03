@@ -1,14 +1,14 @@
 output "AU Optronics faytech 0x01312D50" {
   alias $FYT
   mode 1920x1080@60.00
-  pos 1493 0
+  position 1493,0
   scale 1.5
 }
 
 output "Lenovo Group Limited 0x403C Unknown" {
   alias $INTERNAL
   mode 2240x1400@60.00
-  pos 0 0
+  position 0,0
   scale 1.5
 }
 
