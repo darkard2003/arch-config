@@ -18,8 +18,7 @@ install_packages() {
   fi
 }
 
-# Check and install required packages
-for pkg in zsh git curl; do
+for pkg in zsh git curl zoxide; do
   if ! command -v $pkg > /dev/null 2>&1; then
     echo "$pkg is not installed. Installing $pkg..."
     install_packages $pkg
@@ -27,15 +26,7 @@ for pkg in zsh git curl; do
 done
 
 
-# Install Oh-My-Zsh if not already installed
-if [ ! -d ~/.oh-my-zsh ]; then
-  echo "Installing oh-my-zsh..."
-  sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)" "" --unattended
-else
-  echo "Oh-My-Zsh is already installed"
-fi
 
-# Install plugins if they don't exist
 declare -A plugins=(
   ["zsh-autosuggestions"]="https://github.com/zsh-users/zsh-autosuggestions"
   ["fast-syntax-highlighting"]="https://github.com/zdharma-continuum/fast-syntax-highlighting"
@@ -43,7 +34,7 @@ declare -A plugins=(
 )
 
 for plugin in "${!plugins[@]}"; do
-  if [ ! -d ~/.oh-my-zsh/custom/plugins/$plugin ]; then
+  if [ ! -d ~/.zsh/plugins/$plugin ]; then
     echo "Installing $plugin..."
     git clone ${plugins[$plugin]} ~/.oh-my-zsh/custom/plugins/$plugin
   else
@@ -51,13 +42,11 @@ for plugin in "${!plugins[@]}"; do
   fi
 done
 
-# Backup existing .zshrc if it exists
 if [ -f ~/.zshrc ]; then
   echo "Backing up existing .zshrc..."
   mv ~/.zshrc ~/.zshrc.backup.$(date +%Y%m%d_%H%M%S)
 fi
 
-# Copy new zshrc
 cp ./.zshrc ~/.zshrc
 
 echo "Setup completed successfully!"
