@@ -1,53 +1,68 @@
-install_packages() {
-  if command -v apt-get > /dev/null 2>&1; then
-    sudo apt-get install -y $1
-  elif command -v yum > /dev/null 2>&1; then
-    sudo yum install -y $1
-  elif command -v pacman > /dev/null 2>&1; then
-    sudo pacman -S $1 --noconfirm
-  elif command -v dnf > /dev/null 2>&1; then
-    sudo dnf install -y $1
-  else
-    echo "Could not find a package manager to install packages with."
-    exit 1
-  fi
+#!/bin/bash
 
-  if [ $? -ne 0 ]; then
-    echo "Failed to install $1"
-    exit 1
-  fi
-}
-
+# --- 1. INSTALL REQUIRED PACKAGES (Arch Linux Specific) ---
+echo "Checking for required packages on Arch Linux..."
+packages_to_install=""
+# Added zoxide to the list of packages to check
 for pkg in zsh git curl zoxide; do
-  if ! command -v $pkg > /dev/null 2>&1; then
-    echo "$pkg is not installed. Installing $pkg..."
-    install_packages $pkg
+  # Use pacman's query command '-Q' to check if a package is installed
+  if ! pacman -Q "$pkg" > /dev/null 2>&1; then
+    packages_to_install+="$pkg "
   fi
 done
 
+if [ -n "$packages_to_install" ]; then
+  echo "Installing missing packages: $packages_to_install"
+  # Use pacman to install all missing packages at once
+  sudo pacman -S --noconfirm $packages_to_install
+else
+  echo "Core packages are already installed."
+fi
 
+
+# --- 2. INSTALL ZSH PLUGINS ---
+echo "Checking for Zsh plugins..."
+PLUGINS_DIR="$HOME/.zsh/plugins"
+mkdir -p "$PLUGINS_DIR" # Ensure the plugin directory exists
 
 declare -A plugins=(
   ["zsh-autosuggestions"]="https://github.com/zsh-users/zsh-autosuggestions"
   ["fast-syntax-highlighting"]="https://github.com/zdharma-continuum/fast-syntax-highlighting"
-  ["zsh-autocomplete"]="https://github.com/marlonrichert/zsh-autocomplete.git --depth=1"
+  ["zsh-autocomplete"]="https://github.com/marlonrichert/zsh-autocomplete.git"
 )
 
+# The "${!plugins[@]}" syntax correctly creates a list of the keys from the map (the plugin names).
+# This is the standard way to iterate over an associative array in Bash.
 for plugin in "${!plugins[@]}"; do
-  if [ ! -d ~/.zsh/plugins/$plugin ]; then
+  if [ ! -d "$PLUGINS_DIR/$plugin" ]; then
     echo "Installing $plugin..."
-    git clone ${plugins[$plugin]} ~/.oh-my-zsh/custom/plugins/$plugin
+    # The URL is retrieved using the key: "${plugins[$plugin]}"
+    git clone --depth=1 "${plugins[$plugin]}" "$PLUGINS_DIR/$plugin"
   else
-    echo "$plugin is already installed"
+    echo "$plugin is already installed."
   fi
 done
 
-if [ -f ~/.zshrc ]; then
-  echo "Backing up existing .zshrc..."
-  mv ~/.zshrc ~/.zshrc.backup.$(date +%Y%m%d_%H%M%S)
+
+# --- 3. CONFIGURE ZSHRC ---
+# This part assumes a file named '.zshrc' is in the same directory as this script
+ZSHRC_SOURCE="./.zshrc"
+
+if [ ! -f "$ZSHRC_SOURCE" ]; then
+    echo "ERROR: The source .zshrc file was not found at $ZSHRC_SOURCE."
+    echo "Please run this script from the same directory as your dotfiles."
+    exit 1
 fi
 
-cp ./.zshrc ~/.zshrc
+if [ -f "$HOME/.zshrc" ]; then
+  echo "Backing up existing .zshrc..."
+  mv "$HOME/.zshrc" "$HOME/.zshrc.backup.$(date +%Y%m%d_%H%M%S)"
+fi
 
+echo "Copying new .zshrc configuration..."
+cp "$ZSHRC_SOURCE" "$HOME/.zshrc"
+
+echo ""
 echo "Setup completed successfully!"
+echo "Please restart your terminal or run 'source ~/.zshrc' to see the changes."
 
