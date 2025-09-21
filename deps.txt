@@ -12,6 +12,7 @@ swayidle
 swaybg
 waybar
 wofi
+autotiling
 wob
 brightnessctl
 bluetui
