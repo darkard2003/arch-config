@@ -118,7 +118,8 @@ M.handler = function(server_name)
     }
     opts = vim.tbl_deep_extend("force", opts, lua_opts)
   end
-  require('lspconfig')[server_name].setup(opts)
+  vim.lsp.config(server_name, opts)
+  vim.lsp.enable(server_name)
 end
 
 
