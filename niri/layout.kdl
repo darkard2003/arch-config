@@ -1,0 +1,33 @@
+overview {
+  zoom 0.5
+  backdrop-color "#0f0f0f"
+}
+
+layout {
+    gaps 16
+    always-center-single-column
+    preset-column-widths {
+        proportion 0.33333
+        proportion 0.5
+        proportion 0.66667
+    }
+    preset-window-heights {
+        proportion 0.5
+        proportion 0.75
+        proportion 1.0
+    }
+    default-column-width {
+      proportion 0.5
+    }
+    border {
+        off
+        width 4
+    }
+    focus-ring {
+        width 4
+    }
+    shadow {
+        on
+    }
+    struts {}
+}

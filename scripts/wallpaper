@@ -18,6 +18,7 @@ fi
 
 echo "Changing sway wallpaper to $image"
 echo "output * bg $WALLPAPER_DIR/$image.jpg fill" > $CONFIG_DIR/sway/wallpaper.conf
+echo "spawn-sh-at-startup \"swaybg -i $WALLPAPER_DIR/'$image'.jpg\"" > $CONFIG_DIR/niri/wallpaper.kdl
 
 echo "Generating pywal colorscheme"
 wal -i $WALLPAPER_DIR/$image.jpg
@@ -38,3 +39,9 @@ sh $CONFIG_DIR/wob/generate.sh
 echo "Reloading swaync"
 swaync-client -R && swaync-client -rs
 
+# # Check if running in niri
+# if [ -n "$NIRI_SOCKET" ]; then
+#   echo "Running in niri, killing swaybg"
+#   killall swaybg
+#   swaybg -i $WALLPAPER_DIR/$image.jpg &
+# fi

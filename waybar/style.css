@@ -94,24 +94,27 @@ button:hover {
 #wireplumber,
 #custom-media,
 #custom-arch,
+#custom-pi-indicator,
+#custom-weather,
 #tray,
 #mode,
 #idle_inhibitor,
 #scratchpad,
 #power-profiles-daemon,
+#custom-power,
 #custom-notification,
 #bluetooth,
 #mpd,
 #language,
 #keyboard-state,
 #privacy-item {
-    padding: 0 10px;
+    margin: 0 5;
     color: @foreground;
 }
 
 #window,
 #workspaces {
-    margin: 0 4px;
+    margin: 0;
 }
 
 .modules-left {

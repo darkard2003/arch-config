@@ -1,0 +1,20 @@
+input {
+    keyboard {
+        xkb {
+        }
+        numlock
+    }
+    touchpad {
+        tap
+        natural-scroll
+    }
+    mouse {
+    }
+    trackpoint {
+    }
+}
+
+cursor {
+  hide-when-typing
+  hide-after-inactive-ms 1000
+}

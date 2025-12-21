@@ -1,0 +1,9 @@
+spawn-sh-at-startup "dex -a -e niri"
+spawn-at-startup "waybar"
+spawn-at-startup "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"
+spawn-at-startup "swaync"
+spawn-at-startup "swayidle" "-w" "timeout" "601" "niri msg action power-off-monitors" "timeout" "600" "swaylock -f" "before-sleep" "swaylock -f"
+
+spawn-sh-at-startup "wlsunset -l 22.9 -L 88.4"
+spawn-sh-at-startup "wl-paste --watch cliphist store"
+spawn-sh-at-startup "WOBSOCK=${XDG_RUNTIME_DIR:-/run/user/$(id -u)}/wob.sock; rm -f $WOBSOCK && mkfifo $WOBSOCK && tail -f $WOBSOCK | wob -c ~/.config/wob/wob.ini"

@@ -1,0 +1,17 @@
+layout {
+    focus-ring {
+        active-color "#7fc8ff"
+        inactive-color "#505050"
+    }
+    border {
+        active-color "#000000"
+        inactive-color "#505050"
+        urgent-color "#9b0000"
+    }
+    shadow {
+        softness 30
+        spread 5
+        offset x=0 y=5
+        color "#0007"
+    }
+}

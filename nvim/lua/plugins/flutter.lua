@@ -26,7 +26,7 @@ return {
           virtual_text = true, -- show the highlight using virtual text
           virtual_text_str = "■", -- the virtual text character to highlight
         },
-        capabilites = lsp.capabilites,
+        capabilities = lsp.capabilities,
         on_attach = lsp.on_attach,
       },
       dev_log = {

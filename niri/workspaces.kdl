@@ -1,0 +1,3 @@
+workspace "scratch"
+workspace "web"
+workspace "code"
