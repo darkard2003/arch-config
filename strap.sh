@@ -17,6 +17,8 @@ CONFIGS=(
   "qutebrowser"
   "niri"
   "kanshi"
+  "zed"
+  "opencode"
 ) 
 
 safe_clean(){

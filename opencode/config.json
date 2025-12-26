@@ -1,0 +1,55 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "model": "ollama/qwen3-16k",
+  "small_model": "ollama/qwen2.5-coder:1.5b",
+  "agent": {
+    "build": {
+      "mode": "primary",
+      "model": "ollama/qwen3-16k"
+    },
+    "explore": {
+      "mode": "subagent",
+      "model": "ollama/qwen3:4b-16k",
+      "system_prompt": "You are a Codebase Scout. Your job is to find context for the Main Builder. \n\n1. DISCOVERY: Locate relevant files, entry points, and schemas. \n2. ARCHITECTURE: Identify design patterns (e.g., MVC, Hooks, Services). \n3. NO CODE: Do not write implementation code; focus on mapping dependencies. \n4. BREVITY: Summarize findings in bullet points to save context window space. \n\nWhen exploring, look for connections between the user's request and the existing file structure."
+    },
+    "general": {
+      "mode": "subagent",
+      "model": "ollama/qwen3:4b-16k",
+      "system_prompt": "You are a general-purpose technical assistant. Answer questions concisely and provide high-level explanations of concepts."
+    }
+  },
+  "provider": {
+    "ollama": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "Mac Mini M4 Server",
+      "options": {
+        "baseURL": "http://darkmac:11434/v1"
+      },
+      "models": {
+        "qwen3-16k": {
+          "name": "Qwen 3 Coder with tools",
+          "reasoning": true,
+          "tool_call": true,
+          "options": {
+            "num_ctx": 16384
+          }
+        },
+        "qwen3:4b-16k": {
+          "name": "Fast subagent",
+          "reasoning": true,
+          "tool_call": true,
+          "options": {
+            "num_ctx": 16384
+          }
+        },
+        "qwen2.5-coder:1.5b": {
+          "name": "Utility mode",
+          "tool_call": true,
+          "options": {
+            "num_ctx": 4196
+          }
+        }
+      }
+    }
+  }
+}

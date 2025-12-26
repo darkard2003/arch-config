@@ -13,7 +13,15 @@ cmp.setup({
       symbol_map = {
         Copilot = "",
         Supermaven = "",
+        Ollama = "󱚣",
       },
+      before = function(entry, vim_item)
+        if entry.source.name == "minuet" then
+          vim_item.kind = "Ollama"
+          vim_item.kind_hl_group = "CmpItemKindCopilot"
+        end
+        return vim_item
+      end,
       maxwidth = {
         menu = 50,
         abbr = 50,
@@ -49,15 +57,31 @@ cmp.setup({
       "i",
       "s",
     }),
+    before = function(entry, vim_item)
+      -- Map the source 'minuet' to the symbol 'Minuet'
+      if entry.source.name == "minuet" then
+        vim_item.kind = "Minuet"
+        vim_item.kind_hl_group = "CmpItemKindCopilot"
+      end
+      return vim_item
+    end
   }),
   sources = cmp.config.sources({
+    { name = 'minuet',     group_index = 1 },
+    { name = "cmp-ai",     group_index = 1 },
     { name = "supermaven", group_index = 1 },
     { name = "copilot",    group_index = 2 },
     { name = 'nvim_lsp',   group_index = 2 },
     { name = 'luasnip',    group_index = 2 }, -- For luasnip users.
   }, {
     { name = 'buffer' },
-  })
+  }),
+  performence = {
+    fetching_timeout = 2000,
+  },
+  experimental = {
+    ghost_text = true,
+  }
 })
 cmp.setup.cmdline({ '/', '?' }, {
   mapping = cmp.mapping.preset.cmdline(),
