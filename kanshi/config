@@ -19,5 +19,5 @@ profile "default" {
 profile "fyt" {
   output $INTERNAL enable
   output $FYT enable
-  exec swaymsg input "3823:49154:eGalax_Inc._eGalaxTouch_P80H60_1250_vT04_20M02_k4.08.164" map_to_output '"AU Optronics faytech 0x01312D50"'
+  exec swaymsg input "3823:49154:eGalax_Inc._eGalaxTouch_P80H60_1250_vT04_20M02_k4.08.164" map_to_output "'AU Optronics faytech 0x01312D50'"
 }
