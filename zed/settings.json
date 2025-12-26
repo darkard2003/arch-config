@@ -7,6 +7,11 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+  "languages": {
+    "JSONC": {
+      "show_edit_predictions": false
+    }
+  },
   "lsp": {
     "tailwindcss-language-server": {
       "settings": {
@@ -32,10 +37,10 @@
   ],
   "disable_ai": false,
   "agent": {
-    "default_profile": "ask",
+    "default_profile": "write",
     "default_model": {
       "provider": "ollama",
-      "model": "qwen2.5-coder:7b",
+      "model": "qwen3-16k:latest",
     },
     "model_parameters": [],
   },
@@ -68,7 +73,7 @@
   "ui_font_size": 16,
   "buffer_font_size": 15,
   "theme": {
-    "mode": "system",
+    "mode": "dark",
     "light": "Ayu Light",
     "dark": "Ayu Dark",
   },
