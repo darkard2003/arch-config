@@ -6,22 +6,27 @@ require("luasnip.loaders.from_vscode").lazy_load()
 
 vim.api.nvim_set_hl(0, "CmpItemKindSupermaven", { fg = "#6CC644" })
 
+
+
 cmp.setup({
+  fields = { 'kind', 'abbr', 'menu' },
   formatting = {
     format = lspkind.cmp_format({
       mode = 'symbol',
       symbol_map = {
         Copilot = "",
         Supermaven = "",
-        Ollama = "󱚣",
+        claude = '󰋦',
+        openai = '󱢆',
+        codestral = '󱎥',
+        gemini = '',
+        Groq = '',
+        Openrouter = '󱂇',
+        Ollama = '󰳆',
+        ['Llama.cpp'] = '󰳆',
+        Deepseek = '',
+        fallback = '',
       },
-      before = function(entry, vim_item)
-        if entry.source.name == "minuet" then
-          vim_item.kind = "Ollama"
-          vim_item.kind_hl_group = "CmpItemKindCopilot"
-        end
-        return vim_item
-      end,
       maxwidth = {
         menu = 50,
         abbr = 50,
