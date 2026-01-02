@@ -6,8 +6,6 @@ require("luasnip.loaders.from_vscode").lazy_load()
 
 vim.api.nvim_set_hl(0, "CmpItemKindSupermaven", { fg = "#6CC644" })
 
-
-
 cmp.setup({
   fields = { 'kind', 'abbr', 'menu' },
   formatting = {
@@ -22,6 +20,7 @@ cmp.setup({
         gemini = '',
         Groq = '',
         Openrouter = '󱂇',
+        LMS = "",
         Ollama = '󰳆',
         ['Llama.cpp'] = '󰳆',
         Deepseek = '',
@@ -49,7 +48,13 @@ cmp.setup({
     ['<C-f>'] = cmp.mapping.scroll_docs(4),
     ['<C-Space>'] = cmp.mapping.complete(),
     ['<C-e>'] = cmp.mapping.abort(),
-    ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+    ['<CR>'] = cmp.mapping(function(fallback)
+      if cmp.core.view:visible() then
+        cmp.confirm { select = false }
+      else
+        fallback()
+      end
+    end), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
     ["<Tab>"] = cmp.mapping(function(fallback)
       if luasnip.expandable() then
         luasnip.expand()
@@ -62,14 +67,6 @@ cmp.setup({
       "i",
       "s",
     }),
-    before = function(entry, vim_item)
-      -- Map the source 'minuet' to the symbol 'Minuet'
-      if entry.source.name == "minuet" then
-        vim_item.kind = "Minuet"
-        vim_item.kind_hl_group = "CmpItemKindCopilot"
-      end
-      return vim_item
-    end
   }),
   sources = cmp.config.sources({
     { name = 'minuet',     group_index = 1 },
@@ -84,9 +81,6 @@ cmp.setup({
   performence = {
     fetching_timeout = 2000,
   },
-  experimental = {
-    ghost_text = true,
-  }
 })
 cmp.setup.cmdline({ '/', '?' }, {
   mapping = cmp.mapping.preset.cmdline(),

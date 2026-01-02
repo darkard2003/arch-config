@@ -1,31 +1,64 @@
-local vectorcode_available = vim.fn.executable("vectorcode") == 1
+local has_vectorcode, vectorcode_plugin = pcall(require, 'vectorcode')
+local vectorcode_available = has_vectorcode
 
 local RAG_CONTEXT_SIZE = 8000
 local TOTAL_CTX_SIZE = 16000
 
 local cacher = nil
-local vc_config = nil
-local has_vc_conf = false
 
 if vectorcode_available then
-  require('vectorcode').setup({
-    async_opts = {
-      debounce = 300, -- Wait 300ms after typing before searching
-      events = { "BufWritePost", "InsertEnter", "CursorHold" },
-      n_query = 1,
-      notify = false, -- Disable noisy notifications
+  vectorcode_plugin.setup({
+    cli_cmds = {
+      vectorcode = "vectorcode",
     },
 
-    on_setup = {
-      update = true, -- Equivalent to 'auto_index'
+    async_opts = {
+      n_query = 1,
+      debounce = 10,
+      notify = false,
+      run_on_register = true,
     },
-    timeout_ms = 5000,
   })
 
-  has_vc_conf, vc_config = pcall(require, 'vectorcode.config')
+  local has_vc_conf, vc_config = pcall(require, 'vectorcode.config')
   if has_vc_conf then
-    cacher = vc_config.get_cacher_backend()
+    local status, backend = pcall(vc_config.get_cacher_backend)
+    if status then
+      cacher = backend
+    else
+      print("VectorCode: Could not retrieve backend")
+    end
   end
+else
+  print("VectorCode plugin not found!")
+end
+
+local function template_function(pref, suff, _)
+  local prompt_message = ''
+
+  if cacher then
+    local status, results = pcall(cacher.query_from_cache, 0) -- 0 = Current Buffer
+
+    if status and results and #results > 0 then
+      print("VC: SUCCESS - Found " .. #results .. " snippets")
+      for _, file in ipairs(results) do
+        if file.path and file.document then
+          prompt_message = prompt_message ..
+              '<|file_sep|>' .. file.path .. '\n' .. file.document .. '\n'
+        end
+      end
+    end
+  end
+
+  prompt_message = vim.fn.strcharpart(prompt_message, 0, RAG_CONTEXT_SIZE)
+
+  local current_file = vim.fn.expand('%')
+
+  return prompt_message ..
+      '<|file_sep|>' .. current_file .. '\n' ..
+      '<|fim_prefix|>' .. pref ..
+      '<|fim_suffix|>' .. suff ..
+      '<|fim_middle|>'
 end
 
 require('minuet').setup {
@@ -41,31 +74,14 @@ require('minuet').setup {
       model = 'qwen2.5-fast-complete',
       stream = true,
 
-      optional = { max_tokens = 128 },
+      optional = {
+        stop = { "<|file_sep|>", "<|fim_prefix|>", "<|fim_suffix|>", "<|fim_middle|>", "<|endoftext|>" },
+        max_tokens = 128,
+      },
+
 
       template = {
-        prompt = function(pref, suff, _)
-          local prompt_message = ''
-
-
-          if has_vc_conf then
-            if cacher and cacher.query_from_cache then
-              local results = cacher.query_from_cache(0) -- 0 = Current Buffer
-              for _, file in ipairs(results) do
-                prompt_message = prompt_message ..
-                    '<|file_sep|>' .. file.path .. '\n' .. file.document .. '\n'
-              end
-            end
-          end
-
-          prompt_message = vim.fn.strcharpart(prompt_message, 0, RAG_CONTEXT_SIZE)
-
-          return prompt_message ..
-              '<|file_sep|>\n' ..
-              '<|fim_prefix|>' .. pref ..
-              '<|fim_suffix|>' .. suff ..
-              '<|fim_middle|>'
-        end,
+        prompt = template_function,
         suffix = false,
       },
     },
@@ -73,3 +89,24 @@ require('minuet').setup {
   throttle = 100,
   debounce = 200,
 }
+
+vim.api.nvim_create_autocmd({ "BufReadPost", "BufNewFile" }, {
+  callback = function()
+    local bufnr = vim.api.nvim_get_current_buf()
+
+    if cacher then
+      local has_vc_cacher, vc_cacher_mod = pcall(require, "vectorcode.cacher")
+
+      if has_vc_cacher and vc_cacher_mod.utils and vc_cacher_mod.utils.async_check then
+        vc_cacher_mod.utils.async_check("config", function()
+          cacher.register_buffer(bufnr, { n_query = 1 })
+        end, nil)
+      elseif cacher.async_check then
+        cacher.async_check("config", function()
+          cacher.register_buffer(bufnr, { n_query = 1 })
+        end, nil)
+      end
+    end
+  end,
+  desc = "Auto-register buffer for VectorCode context",
+})
