@@ -3,7 +3,6 @@ return {
     'davidyz/vectorcode',
     event = "BufReadPre",
   },
-
   {
     "milanglacier/minuet-ai.nvim",
     dependencies = { "nvim-lua/plenary.nvim", "davidyz/vectorcode" },
