@@ -14,6 +14,15 @@ window-rule {
 }
 
 window-rule {
+    match app-id=r"mpv-pip"
+    open-floating true
+    default-column-width { fixed 720; }
+    default-window-height { fixed 480; }
+    open-focused false
+    default-floating-position x=5 y=5 relative-to="top-right"
+}
+
+window-rule {
   match app-id=r"(zen|firefox)$" title="Extention"
   open-floating true
 }

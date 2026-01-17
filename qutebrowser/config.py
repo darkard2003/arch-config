@@ -7,14 +7,11 @@ c.completion.shrink = True
 c.colors.webpage.preferred_color_scheme = "dark"
 # c.colors.webpage.darkmode.enabled = True
 
+c.url.searchengines = {
+    "DEFAULT": "https://duckduckgo.com/?q={}",
+    "go": "https://pkg.go.dev/search?q={}",
+    "aw": "https://wiki.archlinux.org/index.php?search={}",
+}
 
-# Catppuccin Theme
-if not os.path.exists(config.configdir / "theme.py"):
-    theme = "https://raw.githubusercontent.com/catppuccin/qutebrowser/main/setup.py"
-    with urlopen(theme) as themehtml:
-        with open(config.configdir / "theme.py", "a") as file:
-            file.writelines(themehtml.read().decode("utf-8"))
-
-if os.path.exists(config.configdir / "theme.py"):
-    import theme
-    theme.setup(c, 'mocha', True)
+config.bind(",v", "spawn mpv --wayland-app-id=mpv-pip {url}")
+config.bind(",V", "hint links spawn mpv  {hint-url}")

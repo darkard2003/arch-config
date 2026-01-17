@@ -71,7 +71,7 @@ require('minuet').setup {
       api_key = 'TERM',
       name = 'Ollama',
       end_point = 'http://darkmac:11434/v1/completions',
-      model = 'qwen2.5-fast-complete',
+      model = 'qwen2.5-fast-complete-mini',
       stream = true,
 
       optional = {

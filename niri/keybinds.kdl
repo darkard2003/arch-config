@@ -124,6 +124,7 @@ binds {
     // Miscellaneous
     Mod+Shift+Slash { show-hotkey-overlay; }
     Mod+O repeat=false { toggle-overview; }
+    XF86LaunchB { toggle-overview; }
     Print { screenshot-screen; }
     Mod+Shift+S { spawn "screenshot"; }
     Alt+Print { screenshot-window; }
