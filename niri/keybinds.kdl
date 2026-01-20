@@ -132,4 +132,7 @@ binds {
     Mod+Shift+V { spawn-sh "cliphist list | wofi -d | cliphist decode | wl-copy"; }
     Mod+Shift+E { spawn-sh "wofi-emoji"; }
     Mod+P { spawn-sh "mirror"; }
+
+    Mod+B { spawn "qutebrowser"; }
+    Mod+E { spawn "thunar"; }
 }
