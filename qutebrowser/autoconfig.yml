@@ -8,5 +8,9 @@ config_version: 2
 settings:
   colors.webpage.darkmode.enabled:
     global: false
+  content.media.audio_video_capture:
+    https://meet.google.com: true
   content.register_protocol_handler:
     https://mail.google.com?extsrc=mailto&url=%25s: false
+  window.hide_decoration:
+    global: true

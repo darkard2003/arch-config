@@ -1,6 +1,8 @@
+import subprocess
 from qutebrowser.config.configfiles import ConfigAPI  # noqa: F401
 from qutebrowser.config.config import ConfigContainer  # noqa: F401
 from wal_theme import apply_wal_colors
+from qutebrowser.api import interceptor, message
 
 # pylint: disable=C0111
 config: ConfigAPI = config  # noqa: F821 pylint: disable=E0602,C0103
