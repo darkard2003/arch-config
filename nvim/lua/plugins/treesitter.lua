@@ -15,31 +15,20 @@ return {
       pattern = "*", -- Trigger on ALL filetypes
       callback = function(args)
         local bufnr = args.buf
+        -- local buftype = vim.bo[bufnr].buftype
+        --
+        -- if buftype ~= '' and buftype ~= 'help' then
+        --   return
+        -- end
+
         local ft = vim.bo[bufnr].filetype
-        local ignore_fts = {
-          "TelescopePrompt",
-          "TelescopeResults",
-          "cmp_menu",
-          "cmp_docs",
-          "lazy",
-          "mason",
-          "NvimTree",
-          "neo-tree",
-          "notify",
-          "prompt",
-        }
-
-        if vim.tbl_contains(ignore_fts, ft) then
-          return
-        end
-
         local lang = vim.treesitter.language.get_lang(ft)
 
         if not lang then
           return
         end
 
-        local has_parser = pcall(vim.treesitter.language.add, lang)
+        local has_parser = vim.tbl_contains(langs, lang)
 
         if has_parser then
           vim.treesitter.start(bufnr, lang)
