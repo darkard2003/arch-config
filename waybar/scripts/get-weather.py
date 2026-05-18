@@ -11,6 +11,7 @@ import time
 
 CACHE_FILE = Path(os.path.expanduser("~/.cache/waybar-weather.json"))
 URL_TEMPLATE = "https://wttr.in/{}?format=j1"
+DEFAULT_PIN_CODE="741234"
 
 SUN_COLOR = "#FFD700"  # Gold
 MOON_COLOR = "#D8BFD8"  # Thistle (Pale Purple)
@@ -221,7 +222,10 @@ def output_weather_data(weather_data, last_updated, cached=False):
 
 
 def main():
-    city = sys.argv[1] if len(sys.argv) > 1 else ""
+    # city = sys.argv[1] if len(sys.argv) > 1 else ""
+    # get the city from env or use default
+    city = os.environ.get("WAYBAR_WEATHER_CITY", DEFAULT_PIN_CODE)
+    
 
     while True:
         weather_data, status, last_updated = get_weather_data(city)

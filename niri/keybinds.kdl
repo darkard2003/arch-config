@@ -126,7 +126,7 @@ binds {
     Mod+O repeat=false { toggle-overview; }
     XF86LaunchB { toggle-overview; }
     Print { screenshot-screen; }
-    Mod+Shift+S { spawn "screenshot"; }
+    Mod+Shift+S { spawn-sh "screenshot"; }
     Alt+Print { screenshot-window; }
     Mod+Escape allow-inhibiting=false { toggle-keyboard-shortcuts-inhibit; }
     Mod+Shift+V { spawn-sh "cliphist list | wofi -d | cliphist decode | wl-copy"; }

@@ -336,7 +336,7 @@
     "markup": "pango"
   },
   "custom/weather": {
-    "exec": "$HOME/.config/waybar/scripts/get-weather.py 741234",
+    "exec": "$HOME/.config/waybar/scripts/get-weather.py",
     "return-type": "json",
     "restart-interval": 3600,
     "markup": "pango"
@@ -344,5 +344,4 @@
   "disk": {
     "format": "{}% ",
   }
-
 }

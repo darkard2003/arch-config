@@ -52,8 +52,7 @@ M.on_attach = function(client, buffer)
     vim.keymap.set('n', v.keymap, v.action, { buffer = buffer })
   end
 
-  -- Manual format keymap
-  if client.supports_method('textDocument/formatting') then
+  if client:supports_method('textDocument/formatting') then
     vim.keymap.set('n', '<leader>fm', function()
       vim.lsp.buf.format({ async = true })
     end, { buffer = buffer })
