@@ -41,7 +41,7 @@
     "ollama": {
       "api_url": "http://darkmac:11434",
       "max_output_tokens": 128,
-      "prompt_format": "qwen",
+      "prompt_format": "infer",
       "model": "qwen2.5-fast-complete-mini:latest",
     },
     "provider": "zed",
