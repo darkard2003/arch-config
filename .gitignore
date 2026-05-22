@@ -8,3 +8,5 @@ swaylock/config
 swaync/colors.css
 waybar/colors-waybar.css
 wob/wob.ini
+
+**/*.antigravitycli

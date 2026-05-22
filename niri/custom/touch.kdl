@@ -1,0 +1,5 @@
+input {                                                                                                                 
+    touch {                                                                                                             
+        map-to-output "AU Optronics faytech 0x01312D50"                                                                 
+    }                                                                                                                   
+}
