@@ -7,6 +7,3 @@ workspace "2" {
 workspace "3" {
     open-on-output "eDP-1"
 }
-workspace "4" {
-    open-on-output "eDP-1"
-}

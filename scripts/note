@@ -3,11 +3,17 @@
 NOTES_DIR="$HOME/notes"
 TERMINAL="kitty"
 NEW_NOTE_OPTION="new"
+IGNORE_FILE="$NOTES_DIR/.notesignore"
 
 if [[ ! -d "$NOTES_DIR" ]]; then
     mkdir -p "$NOTES_DIR"
 fi
 
+if [[ -f "$IGNORE_FILE" ]]; then
+  IGNORED_FOLDERS_REGEX=$(grep -v '^#' "$IGNORE_FILE" | grep -v '^$' | sed 's/[.[\*^$+?(){}|]/\\&/g' | paste -sd '|' -)
+else
+    IGNORED_FOLDERS_REGEX="\.git|node_modules|\.stversions"
+fi
 
 open_note() {
     local note_name="$1"
@@ -18,17 +24,22 @@ open_note() {
     note_full_path="$NOTES_DIR/$note_name.md"
     note_dir=$(dirname "$note_full_path")
     if [[ ! -d "$note_dir" ]]; then
-      mkdir -p "$note_dir"
+        mkdir -p "$note_dir"
     fi
     exec "$TERMINAL" -e nvim "$NOTES_DIR/$note_name.md"
 }
 
-
-
 other_options=(
+    # Custom options can go here
 )
 
-existing_notes=$(find "$NOTES_DIR" -type f -name "*.md" -printf "%P\n" | sed 's/\.md$//')
+if [[ -n "$IGNORED_FOLDERS_REGEX" ]]; then
+    existing_notes=$(find "$NOTES_DIR" \
+        -type d -regextype posix-extended -regex ".*/(${IGNORED_FOLDERS_REGEX})" -prune -o \
+        -type f -name "*.md" -printf "%P\n" | sed 's/\.md$//')
+else
+    existing_notes=$(find "$NOTES_DIR" -type f -name "*.md" -printf "%P\n" | sed 's/\.md$//')
+fi
 
 all_options=$( { printf '%s\n' "${other_options[@]}"; printf '%s\n' "$existing_notes"; } | sed '/^$/d' )
 
@@ -47,5 +58,5 @@ for option in "${other_options[@]}"; do
 done
 
 case "$selected_option" in
- *) open_note "$selected_option"
+    *) open_note "$selected_option"
 esac

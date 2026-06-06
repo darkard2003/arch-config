@@ -52,8 +52,7 @@
       "persistent-workspaces": {
         "1": [],
         "2": [],
-        "3": [],
-        "4": []
+        "3": []
       },
       "format-icons": {
         "1": " ",
@@ -77,8 +76,7 @@
       "persistent-workspaces": {
         "1": [],
         "2": [],
-        "3": [],
-        "4": []
+        "3": []
       },
       "format-icons": {
         "1": " ",
@@ -122,7 +120,8 @@
       "cpu"
     ],
     "modules-center": [
-      "niri/workspaces"
+      "niri/workspaces",
+      "sway/workspaces"
     ],
     "modules-right": [
       "pulseaudio",

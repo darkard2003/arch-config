@@ -70,13 +70,22 @@
       "args": [],
       "projects": [
         {
-          "paths": ["/Users/dark/code/golang"],
+          "paths": [
+            "/Users/dark/code/golang"
+          ]
         },
         {
-          "paths": ["/Users/dark/code/project/depression"],
-        },
-      ],
+          "paths": [
+            "/Users/dark/code/project/depression"
+          ]
+        }
+      ]
     },
+    {
+      "host": "darkmac",
+      "args": [],
+      "projects": []
+    }
   ],
   "disable_ai": false,
   "agent": {
@@ -88,16 +97,22 @@
         "enable_thinking": false
       }
     ],
-    "default_profile": "ask",
+    "default_profile": "write",
     "default_model": {
-      "effort": "low",
-      "enable_thinking": true,
-      "provider": "copilot_chat",
-      "model": "gemini-3-flash-preview",
+      "enable_thinking": false,
+      "provider": "ollama",
+      "model": "qwen3.5-coder",
     },
     "model_parameters": [],
   },
   "language_models": {
+    "opencode": {
+      "show_zen_models": false,
+      "show_go_models": false
+    },
+    "lmstudio": {
+      "api_url": "http://darkmac:1234/api/v0"
+    },
     "ollama": {
       "api_url": "http://darkmac:11434",
       "available_models": [
