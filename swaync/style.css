@@ -1,7 +1,7 @@
 @import url("colors.css");
 
 :root {
-  --cc-bg: var(--background);
+  --cc-bg: transparent;
   --noti-border-color: var(--color8);
   --noti-bg: var(--background);
   --noti-bg-alpha: 1.0;

@@ -1,7 +1,7 @@
 prompt=Search applications and commands...
 allow_images=true
 hide_scroll=true
-matching=fuzzy
+insensitive=true
 key_down=Alt-j
 key_up=Alt-k
 key_left=Alt-h

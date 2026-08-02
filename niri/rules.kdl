@@ -3,6 +3,11 @@ window-rule {
   clip-to-geometry true
 }
 
+window-rule {
+    match app-id=r#"^waydroid\.com\.android\.vending$"#
+    open-floating true
+}
+
 
 window-rule {
     match app-id=r"(zen|firefox)$" title="^Picture-in-Picture$"

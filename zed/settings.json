@@ -7,12 +7,23 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+  "telemetry": {
+    "diagnostics": false,
+    "metrics": false,
+    "anthropic_retention": false
+  },
+  "ui_font_family": ".ZedSans",
+  "toolbar": {
+    "code_actions": true
+  },
+  "colorize_brackets": true,
   "agent_servers": {
     "opencode": {
       "type": "registry"
     }
   },
   "project_panel": {
+    "hide_hidden": true,
     "dock": "left"
   },
   "outline_panel": {
@@ -37,11 +48,14 @@
     "toggle_relative_line_numbers": true
   },
   "edit_predictions": {
+    "open_ai_compatible_api": {
+      "api_url": ""
+    },
     "mode": "subtle",
     "ollama": {
       "api_url": "http://darkmac:11434",
       "max_output_tokens": 128,
-      "prompt_format": "infer",
+      "prompt_format": "qwen",
       "model": "qwen2.5-fast-complete-mini:latest",
     },
     "provider": "zed",
@@ -89,6 +103,7 @@
   ],
   "disable_ai": false,
   "agent": {
+    "sidebar_side": "right",
     "dock": "right",
     "favorite_models": [
       {
@@ -99,9 +114,9 @@
     ],
     "default_profile": "write",
     "default_model": {
-      "enable_thinking": true,
+      "enable_thinking": false,
       "provider": "ollama",
-      "model": "qwen3.5-coder-mlx-32k:latest",
+      "model": "qwen2.5-fast-complete-mini:latest",
     },
     "model_parameters": [],
   },
@@ -145,10 +160,14 @@
       "milliseconds": 1000,
     },
   },
-  "buffer_font_fallbacks": ["Droid Sans Mono", "monospace", "monospace"],
+  "buffer_font_fallbacks": [
+    "Droid Sans Mono",
+    "monospace",
+    "monospace"
+  ],
   "buffer_font_family": "JetBrainsMono Nerd Font",
   "show_edit_predictions": true,
-  "ui_font_size": 16,
+  "ui_font_size": 16.0,
   "buffer_font_size": 15,
   "theme": {
     "mode": "dark",

@@ -5,17 +5,17 @@ M.setup = function()
 
   -- Fixed direction: [ is usually 'previous', ] is 'next'
   vim.keymap.set("n", "[d", function()
-    vim.diagnostic.jump { count = -1, float = true }
+    vim.diagnostic.jump({ count = -1, float = true })
   end)
   vim.keymap.set("n", "]d", function()
-    vim.diagnostic.jump { count = 1, float = true }
+    vim.diagnostic.jump({ count = 1, float = true })
   end)
   vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist)
 
   local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
   vim.diagnostic.config({
     virtual_text = {
-      prefix = '',
+      prefix = "",
       spacing = 4,
     },
     signs = {
@@ -30,37 +30,36 @@ M.setup = function()
     update_in_insert = false,
     severity_sort = true,
     float = {
-      border = 'rounded',
+      border = "rounded",
       focusable = false,
-      style = 'minimal',
-      header = '',
-      prefix = '',
+      style = "minimal",
+      header = "",
+      prefix = "",
     },
   })
 end
 
 M.on_attach = function(client, buffer)
   local lsp_method_map = {
-    { name = 'textDocument/rename',         keymap = '<leader>rn', action = vim.lsp.buf.rename },
-    { name = 'textDocument/implementation', keymap = 'gi',         action = vim.lsp.buf.implementation },
-    { name = 'textDocument/codeAction',     keymap = '<leader>ca', action = vim.lsp.buf.code_action },
-    { name = 'textDocument/definition',     keymap = 'gd',         action = vim.lsp.buf.definition },
+    { name = "textDocument/rename",         keymap = "<leader>rn", action = vim.lsp.buf.rename },
+    { name = "textDocument/implementation", keymap = "gi",         action = vim.lsp.buf.implementation },
+    { name = "textDocument/codeAction",     keymap = "<leader>ca", action = vim.lsp.buf.code_action },
+    { name = "textDocument/definition",     keymap = "gd",         action = vim.lsp.buf.definition },
   }
 
   for _, v in ipairs(lsp_method_map) do
-    vim.keymap.set('n', v.keymap, v.action, { buffer = buffer })
+    vim.keymap.set("n", v.keymap, v.action, { buffer = buffer })
   end
 
-  vim.keymap.set('n', '<leader>fm', function()
+  vim.keymap.set("n", "<leader>fm", function()
     vim.lsp.buf.format({ async = true })
   end, { buffer = buffer })
 
-  if client:supports_method('textDocument/formatting') then
-
+  if client:supports_method("textDocument/formatting") then
     local augroup = vim.api.nvim_create_augroup("LspFormatting", { clear = false })
     vim.api.nvim_clear_autocmds({ group = augroup, buffer = buffer })
 
-    vim.api.nvim_create_autocmd('BufWritePre', {
+    vim.api.nvim_create_autocmd("BufWritePre", {
       group = augroup,
       buffer = buffer,
       callback = function()
@@ -69,9 +68,9 @@ M.on_attach = function(client, buffer)
           id = client.id,
           filter = function(c)
             return c.name == "ruff" or c.name ~= "basedpyright"
-          end
+          end,
         })
-      end
+      end,
     })
   end
 
@@ -82,7 +81,7 @@ M.on_attach = function(client, buffer)
   })
 end
 
-M.capabilities = require('cmp_nvim_lsp').default_capabilities()
+M.capabilities = require("cmp_nvim_lsp").default_capabilities()
 
 M.handler = function(server_name)
   local opts = {
@@ -93,7 +92,7 @@ M.handler = function(server_name)
   if server_name == "lua_ls" then
     opts.settings = {
       Lua = {
-        runtime = { version = 'LuaJIT' },
+        runtime = { version = "LuaJIT" },
         workspace = {
           checkThirdParty = false,
           library = { vim.env.VIMRUNTIME },
@@ -124,7 +123,14 @@ M.handler = function(server_name)
 
   if server_name == "emmet_language_server" then
     opts.filetypes = {
-      "html", "css", "scss", "javascriptreact", "typescriptreact", "haml", "xml", "templ"
+      "html",
+      "css",
+      "scss",
+      "javascriptreact",
+      "typescriptreact",
+      "haml",
+      "xml",
+      "templ",
     }
   end
 
@@ -136,6 +142,21 @@ M.handler = function(server_name)
     }
   end
 
+  if server_name == "qmlls" then
+    opts.root_marker = {
+      ".git",
+      "shell.qml",
+      "qmldir",
+      ".project",
+    }
+    opts.cmd = {
+      "qmlls",
+      "-I",
+      "/usr/lib/qt6/qml",
+      "-I",
+      "/usr/lib/qt/qml",
+    }
+  end
 
   vim.lsp.config(server_name, opts)
   vim.lsp.enable(server_name)
