@@ -1,6 +1,5 @@
 return {
   "cursortab/cursortab.nvim",
-  keys = "<C-Tab>",
   build = "cd server && go build",
   config = function()
     require("cursortab").setup({

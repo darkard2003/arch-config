@@ -1,3 +1,5 @@
+# ~/.config/kanshi/config
+
 output "AU Optronics faytech 0x01312D50" {
   alias $FYT
   mode 1920x1080@60.00
@@ -14,15 +16,26 @@ output "Lenovo Group Limited 0x403C Unknown" {
 
 profile "default" {
   output $INTERNAL enable
+  
+  # Map tablet to internal display when mobile
+  exec swaymsg input "10429:2344:UGTABLET_6_inch_PenTablet" map_to_output "'Lenovo Group Limited 0x403C Unknown'"
 }
 
 profile "fyt" {
   output $INTERNAL enable
   output $FYT enable
+  
+  # External touch layer stays on the Faytech monitor
   exec swaymsg input "3823:49154:eGalax_Inc._eGalaxTouch_P80H60_1250_vT04_20M02_k4.08.164" map_to_output "'AU Optronics faytech 0x01312D50'"
+  
+  # Pen tablet maps to the laptop screen
+  exec swaymsg input "10429:2344:UGTABLET_6_inch_PenTablet" map_to_output "'Lenovo Group Limited 0x403C Unknown'"
 }
 
 profile "only-fyt" {
   output $FYT enable
+  
+  # Both map to Faytech here since the internal display is disabled
   exec swaymsg input "3823:49154:eGalax_Inc._eGalaxTouch_P80H60_1250_vT04_20M02_k4.08.164" map_to_output "'AU Optronics faytech 0x01312D50'"
+  exec swaymsg input "10429:2344:UGTABLET_6_inch_PenTablet" map_to_output "'AU Optronics faytech 0x01312D50'"
 }

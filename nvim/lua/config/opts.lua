@@ -19,3 +19,12 @@ for k, v in pairs(opts) do
 end
 
 vim.opt.clipboard:append('unnamedplus')
+
+vim.filetype.add({
+  extension = {
+    arb = 'json',
+    tmpl = 'gotmpl',
+    tpl = 'gotmpl',
+    gohtml = 'gotmpl',
+  }
+})

@@ -15,24 +15,11 @@ return {
       pattern = "*", -- Trigger on ALL filetypes
       callback = function(args)
         local bufnr = args.buf
-        -- local buftype = vim.bo[bufnr].buftype
-        --
-        -- if buftype ~= '' and buftype ~= 'help' then
-        --   return
-        -- end
 
         local ft = vim.bo[bufnr].filetype
-        local lang = vim.treesitter.language.get_lang(ft)
+        local lang = vim.treesitter.language.get_lang(ft) or ft
 
-        if not lang then
-          return
-        end
-
-        local has_parser = vim.tbl_contains(langs, lang)
-
-        if has_parser then
-          vim.treesitter.start(bufnr, lang)
-        end
+        pcall(vim.treesitter.start, bufnr, lang)
       end,
     })
   end,

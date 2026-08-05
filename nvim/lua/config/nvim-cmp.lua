@@ -2,6 +2,11 @@ local cmp = require 'cmp'
 local lspkind = require 'lspkind'
 local luasnip = require 'luasnip'
 
+luasnip.setup {
+  region_check_events = "CursorMoved,CursorMovedI",
+  delete_check_events = "TextChanged,InsertLeave",
+}
+
 require("luasnip.loaders.from_vscode").lazy_load()
 
 vim.api.nvim_set_hl(0, "CmpItemKindSupermaven", { fg = "#6CC644" })

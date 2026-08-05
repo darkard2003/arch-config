@@ -19,6 +19,8 @@ bluetui
 grim
 slurp
 kanata
+fzf
+ripgrep
 kitty
 neovim
 nwg-look

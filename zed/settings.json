@@ -99,9 +99,9 @@
     ],
     "default_profile": "write",
     "default_model": {
-      "enable_thinking": false,
+      "enable_thinking": true,
       "provider": "ollama",
-      "model": "qwen3.5-coder",
+      "model": "qwen3.5-coder-mlx-32k:latest",
     },
     "model_parameters": [],
   },
