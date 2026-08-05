@@ -155,6 +155,8 @@ M.handler = function(server_name)
       "/usr/lib/qt6/qml",
       "-I",
       "/usr/lib/qt/qml",
+      "-I",
+      ".qml_imports"
     }
   end
 

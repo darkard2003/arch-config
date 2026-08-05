@@ -49,18 +49,23 @@
   },
   "edit_predictions": {
     "open_ai_compatible_api": {
+      "model": "",
       "api_url": ""
     },
     "mode": "subtle",
     "ollama": {
-      "api_url": "http://darkmac:11434",
+      "api_url": "http://localhost:11434",
       "max_output_tokens": 128,
       "prompt_format": "qwen",
-      "model": "qwen2.5-fast-complete-mini:latest",
+      "model": "qwen2.5-completion-mini:latest",
     },
-    "provider": "zed",
+    "provider": "ollama",
   },
-  "icon_theme": "Catppuccin Mocha",
+  "icon_theme": {
+    "mode": "dark",
+    "light": "Catppuccin Mocha",
+    "dark": "Catppuccin Mocha"
+  },
   "languages": {
     "Java": {
       "show_edit_predictions": true
@@ -109,14 +114,14 @@
       {
         "provider": "ollama",
         "model": "qwen3.5-coder",
-        "enable_thinking": false
+        "enable_thinking": true
       }
     ],
     "default_profile": "write",
     "default_model": {
-      "enable_thinking": false,
+      "enable_thinking": true,
       "provider": "ollama",
-      "model": "qwen2.5-fast-complete-mini:latest",
+      "model": "qwen3.5-coder",
     },
     "model_parameters": [],
   },
@@ -129,7 +134,7 @@
       "api_url": "http://darkmac:1234/api/v0"
     },
     "ollama": {
-      "api_url": "http://darkmac:11434",
+      "api_url": "http://localhost:11434",
       "available_models": [
         {
           "name": "qwen3.5-coder",
@@ -172,6 +177,6 @@
   "theme": {
     "mode": "dark",
     "light": "Ayu Light",
-    "dark": "Catppuccin Mocha",
+    "dark": "Ayu Dark",
   },
 }
